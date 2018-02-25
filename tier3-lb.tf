@@ -1,6 +1,6 @@
 # Front End Load Balancer
 resource "azurerm_lb" "tier3-LB" {
-  name                = "tier3-LoadBalancer"
+  name                = "${var.env}-DB-LoadBalancer"
   location            = "${azurerm_resource_group.ResourceGrps.location}"
   resource_group_name = "${azurerm_resource_group.ResourceGrps.name}"
 
@@ -13,15 +13,13 @@ resource "azurerm_lb" "tier3-LB" {
 
 # Back End Address Pool
 resource "azurerm_lb_backend_address_pool" "tier3" {
-  location            = "${azurerm_resource_group.ResourceGrps.location}"
   resource_group_name = "${azurerm_resource_group.ResourceGrps.name}"
   loadbalancer_id     = "${azurerm_lb.tier3-LB.id}"
-  name                = "BackEndAddressPool"
+  name                = "{var.env}-DB-BackEndAddressPool"
 }
 
 # Load Balancer Rule
 resource "azurerm_lb_rule" "tier3-LBRule" {
-  location                       = "${azurerm_resource_group.ResourceGrps.location}"
   resource_group_name            = "${azurerm_resource_group.ResourceGrps.name}"
   loadbalancer_id                = "${azurerm_lb.tier3-LB.id}"
   name                           = "SQLRule"
@@ -35,7 +33,6 @@ resource "azurerm_lb_rule" "tier3-LBRule" {
 }
 
 resource "azurerm_lb_probe" "tier3-LBProbe" {
-  location            = "${azurerm_resource_group.ResourceGrps.location}"
   resource_group_name = "${azurerm_resource_group.ResourceGrps.name}"
   loadbalancer_id     = "${azurerm_lb.tier3-LB.id}"
   name                = "SQL"

@@ -10,11 +10,7 @@ output "sqlservers_name" {
   value = ["${azurerm_virtual_machine.tier3-vm.*.name}"]
 }
 
-output "fsw_name" {
-  value = ["${azurerm_virtual_machine.fsw.*.name}"]
-}
-
-output "dcs_name" {
+output "iapps_name" {
   value = ["${azurerm_virtual_machine.tier4-vm.*.name}"]
 }
 
@@ -30,7 +26,7 @@ output "webservers_ip" {
   value = ["${azurerm_network_interface.tier1-nics.*.private_ip_address}"]
 }
 
-output "appservers_ip" {
+output "oappservers_ip" {
   value = ["${azurerm_network_interface.tier2-nics.*.private_ip_address}"]
 }
 
@@ -38,11 +34,7 @@ output "sqlservers_ip" {
   value = ["${azurerm_network_interface.tier3-nics.*.private_ip_address}"]
 }
 
-output "fsw_ip" {
-  value = ["${azurerm_network_interface.fsw.*.private_ip_address}"]
-}
-
-output "dcs_ip" {
+output "iappservers_ip" {
   value = ["${azurerm_network_interface.tier4-nics.*.private_ip_address}"]
 }
 
@@ -50,6 +42,6 @@ output "LB_VIP_IP" {
   value = ["${azurerm_public_ip.lbIP.ip_address}"]
 }
 
-output "LB_VIP_DNS" {
-  value = ["${azurerm_public_ip.lbIP.fqdn}"]
-}
+# output "LB_VIP_DNS" {
+#   value = ["${azurerm_public_ip.lbIP.fqdn}"]
+# }

@@ -3,7 +3,7 @@
 # Allow SQL and RDP.  Deny HTTP from tier1,tier2 and Internet 
 
 resource "azurerm_network_security_group" "tier3_fw" {
-  name                = "sql_fw"
+  name                = "${var.env}-db_fw"
   location            = "${azurerm_resource_group.ResourceGrps.location}"
   resource_group_name = "${azurerm_resource_group.ResourceGrps.name}"
 
@@ -15,7 +15,7 @@ resource "azurerm_network_security_group" "tier3_fw" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "1433"
-    source_address_prefix      = "10.0.2.0/24"
+    source_address_prefix      = "${cidrsubnet(var.supernet,12,1)}"
     destination_address_prefix = "*"
   }
 
@@ -27,8 +27,8 @@ resource "azurerm_network_security_group" "tier3_fw" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = "10.0.3.0/24"
-    destination_address_prefix = "10.0.0.128/25"
+    source_address_prefix      = "172.19.255.0/24"
+    destination_address_prefix = "${cidrsubnet(var.supernet,12,2)}"
   }
 
   security_rule {
@@ -39,7 +39,7 @@ resource "azurerm_network_security_group" "tier3_fw" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "80"
-    source_address_prefix      = "10.0.2.0/24"
+    source_address_prefix      = "${cidrsubnet(var.supernet,12,1)}"
     destination_address_prefix = "*"
   }
 
@@ -52,7 +52,7 @@ resource "azurerm_network_security_group" "tier3_fw" {
     source_port_range          = "*"
     destination_port_range     = "80"
     source_address_prefix      = "*"
-    destination_address_prefix = "10.0.2.0/24"
+    destination_address_prefix = "${cidrsubnet(var.supernet,12,1)}"
   }
 
   security_rule {
@@ -63,7 +63,7 @@ resource "azurerm_network_security_group" "tier3_fw" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "80"
-    source_address_prefix      = "10.0.1.0/24"
+    source_address_prefix      = "${cidrsubnet(var.supernet,12,0)}"
     destination_address_prefix = "*"
   }
 
@@ -76,7 +76,7 @@ resource "azurerm_network_security_group" "tier3_fw" {
     source_port_range          = "*"
     destination_port_range     = "80"
     source_address_prefix      = "*"
-    destination_address_prefix = "10.0.1.0/24"
+    destination_address_prefix = "${cidrsubnet(var.supernet,12,0)}"
   }
 
   security_rule {

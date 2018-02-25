@@ -9,7 +9,8 @@ resource "azurerm_network_interface" "tier5-nics" {
   ip_configuration {
     name                          = "ipconfig${count.index +1}"
     subnet_id                     = "${azurerm_subnet.subnet5.id}"
-    private_ip_address_allocation = "dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "${cidrhost(azurerm_subnet.subnet5.address_prefix,count.index+5)}"
     public_ip_address_id          = "${azurerm_public_ip.PublicIP.id}"
   }
 }
