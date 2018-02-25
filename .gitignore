@@ -4,3 +4,4 @@
 .terraform/
 *.txt
 Set-EnvVariables.ps1
+.terraform/

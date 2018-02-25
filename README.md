@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # tf-azure-arm
 Azure RM + Terraform
 
@@ -32,3 +33,7 @@ Configuration:
  * Open Azure Automation Account and upload PowerShell DSC files in the DSC Configurations blade.
  * Compile each DSC file published.
  * Onboard Azure VMs in the DSC Nodes blade.
+=======
+# AzureStuff
+Playing with Azure/Terraform
+>>>>>>> c08c432746c0e2b8398b638adb03fce15760020b
